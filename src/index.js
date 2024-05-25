@@ -38,7 +38,89 @@ const start = async () => {
       const employees = await db.getEmployees();
       console.table(employees); // Display employees in a formatted table
       break;
-    // Additional cases for other actions like adding, updating, or deleting records
+    case "Add a department": // Add a new department
+      const { deptName } = await inquirer.prompt([
+        {
+          type: "input",
+          name: "deptName",
+          message: "Enter the name of the department:",
+        },
+      ]);
+      await db.addDepartment(deptName);
+      console.log(`Added ${deptName} to the database.`);
+      break;
+    case "Add a role": // Add a new role
+      const { roleName, roleSalary, roleDeptId } = await inquirer.prompt([
+        {
+          type: "input",
+          name: "roleName",
+          message: "Enter the name of the role:",
+        },
+        {
+          type: "input",
+          name: "roleSalary",
+          message: "Enter the salary for the role:",
+        },
+        {
+          type: "input",
+          name: "roleDeptId",
+          message: "Enter the department ID for the role:",
+        },
+      ]);
+      await db.addRole(roleName, roleSalary, roleDeptId);
+      console.log(`Added ${roleName} to the database.`);
+      break;
+    case "Add an employee": // Add a new employee
+      const { empFirstName, empLastName, empRoleId, empManagerId } =
+        await inquirer.prompt([
+          {
+            type: "input",
+            name: "empFirstName",
+            message: "Enter the employee's first name:",
+          },
+          {
+            type: "input",
+            name: "empLastName",
+            message: "Enter the employee's last name:",
+          },
+          {
+            type: "input",
+            name: "empRoleId",
+            message: "Enter the employee's role ID:",
+          },
+          {
+            type: "input",
+            name: "empManagerId",
+            message:
+              "Enter the manager ID for the employee (if none, leave blank):",
+          },
+        ]);
+      await db.addEmployee(
+        empFirstName,
+        empLastName,
+        empRoleId,
+        empManagerId || null
+      );
+      console.log(`Added ${empFirstName} ${empLastName} to the database.`);
+      break;
+    case "Update an employee role": // Update an employee's role
+      const { updateEmpId, updateRoleId } = await inquirer.prompt([
+        {
+          type: "input",
+          name: "updateEmpId",
+          message: "Enter the employee ID to update:",
+        },
+        {
+          type: "input",
+          name: "updateRoleId",
+          message: "Enter the new role ID for the employee:",
+        },
+      ]);
+      await db.updateEmployeeRole(updateEmpId, updateRoleId);
+      console.log(
+        `Updated employee ID ${updateEmpId} with new role ID ${updateRoleId}.`
+      );
+      break;
     case "Exit": // Exit the application
       process.exit(); // Terminate the process
   }
