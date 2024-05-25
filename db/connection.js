@@ -2,9 +2,9 @@ const mysql = require("mysql2");
 
 // Create a connection to the database
 const connection = mysql.createConnection({
-  host: "localhost", // Database server address, usually localhost for local development
+  host: "127.0.0.1", // Database server address, usually localhost for local development
   user: "root", // MySQL user with appropriate permissions
-  password: "password", // Password for the MySQL user
+  password: "", // Password for the MySQL user
   database: "company_db", // Name of the database to connect to
 });
 
