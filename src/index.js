@@ -50,6 +50,7 @@ const start = async () => {
       console.log(`Added ${deptName} to the database.`);
       break;
     case "Add a role": // Add a new role
+      const departmentsForRole = await db.getDepartments();
       const { roleName, roleSalary, roleDeptId } = await inquirer.prompt([
         {
           type: "input",
@@ -62,9 +63,13 @@ const start = async () => {
           message: "Enter the salary for the role:",
         },
         {
-          type: "input",
+          type: "list",
           name: "roleDeptId",
-          message: "Enter the department ID for the role:",
+          message: "Which department does the role belong to?",
+          choices: departmentsForRole.map((dept) => ({
+            name: dept.name,
+            value: dept.id,
+          })),
         },
       ]);
       await db.addRole(roleName, roleSalary, roleDeptId);
