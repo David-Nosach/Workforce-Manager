@@ -76,6 +76,8 @@ const start = async () => {
       console.log(`Added ${roleName} to the database.`);
       break;
     case "Add an employee": // Add a new employee
+      const rolesForEmployee = await db.getRoles();
+      const employeesForManager = await db.getEmployees();
       const { empFirstName, empLastName, empRoleId, empManagerId } =
         await inquirer.prompt([
           {
@@ -89,23 +91,27 @@ const start = async () => {
             message: "Enter the employee's last name:",
           },
           {
-            type: "input",
+            type: "list",
             name: "empRoleId",
-            message: "Enter the employee's role ID:",
+            message: "What is the employee's role?",
+            choices: rolesForEmployee.map((role) => ({
+              name: role.title,
+              value: role.id,
+            })),
           },
           {
-            type: "input",
+            type: "list",
             name: "empManagerId",
-            message:
-              "Enter the manager ID for the employee (if none, leave blank):",
+            message: "Who is the employee's manager?",
+            choices: employeesForManager
+              .map((emp) => ({
+                name: `${emp.first_name} ${emp.last_name}`,
+                value: emp.id,
+              }))
+              .concat([{ name: "None", value: null }]),
           },
         ]);
-      await db.addEmployee(
-        empFirstName,
-        empLastName,
-        empRoleId,
-        empManagerId || null
-      );
+      await db.addEmployee(empFirstName, empLastName, empRoleId, empManagerId);
       console.log(`Added ${empFirstName} ${empLastName} to the database.`);
       break;
     case "Update an employee role": // Update an employee's role
