@@ -115,16 +115,26 @@ const start = async () => {
       console.log(`Added ${empFirstName} ${empLastName} to the database.`);
       break;
     case "Update an employee role": // Update an employee's role
+      const employeesForUpdate = await db.getEmployees();
+      const rolesForUpdate = await db.getRoles();
       const { updateEmpId, updateRoleId } = await inquirer.prompt([
         {
-          type: "input",
+          type: "list",
           name: "updateEmpId",
-          message: "Enter the employee ID to update:",
+          message: "Which employee's role would you like to update?",
+          choices: employeesForUpdate.map((emp) => ({
+            name: `${emp.first_name} ${emp.last_name}`,
+            value: emp.id,
+          })),
         },
         {
-          type: "input",
+          type: "list",
           name: "updateRoleId",
-          message: "Enter the new role ID for the employee:",
+          message: "Which role do you want to assign the selected employee?",
+          choices: rolesForUpdate.map((role) => ({
+            name: role.title,
+            value: role.id,
+          })),
         },
       ]);
       await db.updateEmployeeRole(updateEmpId, updateRoleId);
