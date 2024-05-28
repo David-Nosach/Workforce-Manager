@@ -4,6 +4,8 @@
 
 This is a command-line application that allows a business owner to view and manage the departments, roles, and employees in their company. The application provides functionality to organize and plan the business effectively by performing various operations on the company's data stored in a MySQL database.
 
+Video Walkthrough - https://drive.google.com/file/d/1cXnKr7N_jJ2ntzvYTBjnnN8xJO5kaESw/view
+
 ## Installation
 
 1. Clone the repository to your local machine:
