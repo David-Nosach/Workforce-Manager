@@ -27,16 +27,6 @@ Video Walkthrough - https://drive.google.com/file/d/1cXnKr7N_jJ2ntzvYTBjnnN8xJO5
 
 2. Follow the on-screen prompts to perform various operations such as:
 
-   Viewing all departments, roles, and employees
-   Adding a department, role, or employee
-   Updating an employee's role
-
-## Features
-
-View All Departments: Displays a formatted table with department names and IDs.
-View All Roles: Shows job titles, role IDs, the department each role belongs to, and the salaries for each role.
-View All Employees: Displays a formatted table with employee IDs, first and last names, job titles, departments, salaries, and managers.
-Add a Department: Prompts the user to enter a department name and adds it to the database.
-Add a Role: Prompts the user to enter the role name, salary, and department, then adds the role to the database.
-Add an Employee: Prompts the user to enter the employee’s first name, last name, role, and manager, then adds the employee to the database.
-Update an Employee Role: Prompts the user to select an employee and a new role for that employee, then updates the employee's role in the database.
+   1. Viewing all departments, roles, and employees
+   2. Adding a department, role, or employee
+   3. Updating an employee's role
